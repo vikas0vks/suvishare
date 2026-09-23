@@ -55,22 +55,22 @@ jobs:
       - name: Build signed Android packages
         working-directory: app
         run: |
+          set -euo pipefail
           flutter pub get
           flutter gen-l10n
-          flutter build apk --release --split-per-abi --obfuscate --split-debug-info=build/symbols/android
-          flutter build apk --release --obfuscate --split-debug-info=build/symbols/android
-          flutter build appbundle --release --obfuscate --split-debug-info=build/symbols/android
+          mkdir -p build/release-assets
+          flutter build apk --release --obfuscate --split-debug-info=build/symbols/android-universal
+          cp build/app/outputs/flutter-apk/app-release.apk build/release-assets/SuviShare-android-universal.apk
+          flutter build apk --release --target-platform android-arm64 --obfuscate --split-debug-info=build/symbols/android-arm64
+          cp build/app/outputs/flutter-apk/app-release.apk build/release-assets/SuviShare-android-arm64.apk
 
       - name: Stage Android artifacts
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p release/android
-          cp app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk "release/android/SuviShare-android-arm64.apk"
-          cp app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "release/android/SuviShare-android-arm32.apk"
-          cp app/build/app/outputs/flutter-apk/app-x86_64-release.apk "release/android/SuviShare-android-x86_64.apk"
-          cp app/build/app/outputs/flutter-apk/app-release.apk "release/android/SuviShare-android-universal.apk"
-          cp app/build/app/outputs/bundle/release/app-release.aab "release/android/SuviShare-android.aab"
+          cp app/build/release-assets/SuviShare-android-arm64.apk release/android/
+          cp app/build/release-assets/SuviShare-android-universal.apk release/android/
 
       - name: Upload Android artifacts
         uses: actions/upload-artifact@v7
@@ -167,6 +167,25 @@ jobs:
         with:
           path: release
           merge-multiple: true
+
+      - name: Verify release asset allowlist
+        working-directory: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected=(
+            SuviShare-android-arm64.apk
+            SuviShare-android-universal.apk
+            SuviShare-linux-amd64.deb
+            SuviShare-linux-x64.tar.gz
+            SuviShare-windows-x64-setup.exe
+          )
+          mapfile -t actual < <(find . -maxdepth 1 -type f -printf '%f\n' | sort)
+          mapfile -t wanted < <(printf '%s\n' "${expected[@]}" | sort)
+          if ! diff -u <(printf '%s\n' "${wanted[@]}") <(printf '%s\n' "${actual[@]}"); then
+            echo "Release assets do not match the approved allowlist." >&2
+            exit 1
+          fi
 
       - name: Generate checksums
         working-directory: release
