@@ -15,8 +15,15 @@ import 'multicast_lock.dart';
 /// No-op on every other platform.
 class TransferForegroundService {
   static final _log = Logger('suvi.fgservice');
+  static const _notificationUpdateInterval = Duration(seconds: 1);
   static bool _initialised = false;
   static int _refCount = 0;
+  static final Stopwatch _notificationClock = Stopwatch()..start();
+  static int _lastNotificationUpdateMs =
+      -_notificationUpdateInterval.inMilliseconds;
+  static String? _lastNotificationTitle;
+  static String? _lastNotificationBody;
+  static bool _notificationUpdateInFlight = false;
 
   static bool get _supported => Platform.isAndroid;
 
@@ -54,6 +61,12 @@ class TransferForegroundService {
     if (!_supported) return;
     init();
     _refCount++;
+    // Record the initial state before the first platform-channel await. Session
+    // progress can arrive while the service is still starting; without this,
+    // every early update races a second notification write.
+    _lastNotificationTitle = title;
+    _lastNotificationBody = body;
+    _lastNotificationUpdateMs = _notificationClock.elapsedMilliseconds;
     // Keep Wi-Fi at full performance for the duration of the transfer.
     await WifiPerfLock.acquire();
     try {
@@ -79,12 +92,32 @@ class TransferForegroundService {
     required String body,
   }) async {
     if (!_supported || _refCount == 0) return;
+    final nowMs = _notificationClock.elapsedMilliseconds;
+    final unchanged =
+        title == _lastNotificationTitle && body == _lastNotificationBody;
+    final tooSoon =
+        nowMs - _lastNotificationUpdateMs <
+        _notificationUpdateInterval.inMilliseconds;
+    if (unchanged || tooSoon || _notificationUpdateInFlight) return;
+
+    // Android rate-limits notification enqueues. Transfer progress is emitted
+    // several times per second for a smooth in-app UI, but a once-per-second
+    // system notification is enough and avoids repeated SharedPreferences
+    // fsyncs in flutter_foreground_task while the hot byte path is active.
+    _lastNotificationTitle = title;
+    _lastNotificationBody = body;
+    _lastNotificationUpdateMs = nowMs;
+    _notificationUpdateInFlight = true;
     try {
       await FlutterForegroundTask.updateService(
         notificationTitle: title,
         notificationText: body,
       );
-    } catch (_) {}
+    } catch (_) {
+      // A later progress event may retry after the throttle interval.
+    } finally {
+      _notificationUpdateInFlight = false;
+    }
   }
 
   /// Stops the service once every acquirer has released it.
@@ -97,6 +130,12 @@ class TransferForegroundService {
       await FlutterForegroundTask.stopService();
     } catch (e) {
       _log.fine('foreground service stop failed: $e');
+    } finally {
+      _lastNotificationTitle = null;
+      _lastNotificationBody = null;
+      _lastNotificationUpdateMs =
+          -_notificationUpdateInterval.inMilliseconds;
+      _notificationUpdateInFlight = false;
     }
   }
 }

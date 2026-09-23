@@ -575,7 +575,8 @@ class SendService {
         s.files[f.dto.id]!.copyWith(status: FileStatus.sending, sent: offset),
       ),
     );
-    var lastPublish = DateTime.now();
+    final progressClock = Stopwatch()..start();
+    var lastPublishMs = 0;
     try {
       await _client.upload(
         s.target.ip,
@@ -590,12 +591,13 @@ class SendService {
         cancelToken: cancelToken,
         onProgress: (sent, _) {
           final total = offset + sent;
-          final now = DateTime.now();
-          if (now.difference(lastPublish).inMilliseconds < 120 &&
+          final nowMs = progressClock.elapsedMilliseconds;
+          if (nowMs - lastPublishMs <
+                  SuviConstants.progressUpdateIntervalMs &&
               total < f.dto.size) {
             return;
           }
-          lastPublish = now;
+          lastPublishMs = nowMs;
           final cur = _sessions[localId]!;
           _publish(_setFile(cur, cur.files[f.dto.id]!.copyWith(sent: total)));
         },

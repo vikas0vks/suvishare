@@ -49,6 +49,11 @@ class SuviConstants {
   /// backpressure while avoiding thousands of small native I/O calls.
   static const int receiveWriteBufferSize = 4 * 1024 * 1024;
 
+  /// Maximum cadence for transfer snapshots consumed by the UI. Four updates
+  /// per second stay visually smooth while avoiding hot-path map allocation,
+  /// provider rebuild, and platform notification work for every TLS record.
+  static const int progressUpdateIntervalMs = 250;
+
   /// Limits.
   static const int maxFilesPerSession = 10000;
   static const int maxPreviewBytes = 32 * 1024;

@@ -263,8 +263,15 @@ class SessionManager {
 
     RandomAccessFile? output;
     var received = offset;
-    var lastPublish = DateTime.now();
-    final writeBuffer = BytesBuilder(copy: false);
+    final progressClock = Stopwatch()..start();
+    var lastPublishMs = 0;
+    // Reuse one bounded buffer for the whole file. BytesBuilder.takeBytes()
+    // allocates a new multi-megabyte Uint8List on every flush when a request
+    // arrives as many TLS records. Sustained Android transfers then spend a
+    // meaningful amount of CPU copying and collecting short-lived buffers,
+    // especially after the activity moves to the background.
+    final writeBuffer = Uint8List(SuviConstants.receiveWriteBufferSize);
+    var bufferedBytes = 0;
     final digestCollector = rf.file.sha256 != null
         ? _DigestSinkCollector()
         : null;
@@ -289,9 +296,9 @@ class SessionManager {
       _openFiles[fileId] = output;
 
       Future<void> flushWriteBuffer() async {
-        if (writeBuffer.isEmpty) return;
-        final bytes = writeBuffer.takeBytes();
-        await output!.writeFrom(bytes);
+        if (bufferedBytes == 0) return;
+        await output!.writeFrom(writeBuffer, 0, bufferedBytes);
+        bufferedBytes = 0;
       }
 
       try {
@@ -304,13 +311,28 @@ class SessionManager {
             throw const FormatException('Body larger than declared size');
           }
           hasher?.add(chunk);
-          writeBuffer.add(chunk);
-          if (writeBuffer.length >= SuviConstants.receiveWriteBufferSize) {
-            await flushWriteBuffer();
+
+          var sourceOffset = 0;
+          while (sourceOffset < chunk.length) {
+            final available = writeBuffer.length - bufferedBytes;
+            final byteCount = min(available, chunk.length - sourceOffset);
+            writeBuffer.setRange(
+              bufferedBytes,
+              bufferedBytes + byteCount,
+              chunk,
+              sourceOffset,
+            );
+            bufferedBytes += byteCount;
+            sourceOffset += byteCount;
+            if (bufferedBytes == writeBuffer.length) {
+              await flushWriteBuffer();
+            }
           }
-          final now = DateTime.now();
-          if (now.difference(lastPublish).inMilliseconds > 150) {
-            lastPublish = now;
+
+          final nowMs = progressClock.elapsedMilliseconds;
+          if (nowMs - lastPublishMs >=
+              SuviConstants.progressUpdateIntervalMs) {
+            lastPublishMs = nowMs;
             _updateFile(fileId, (f) => f.copyWith(received: received));
           }
         }
