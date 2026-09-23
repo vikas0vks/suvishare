@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="Resume transfers">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#16433e"/><stop offset="1" stop-color="#282c49"/></linearGradient></defs>
+  <rect width="72" height="72" rx="18" fill="url(#g)"/><path d="M18 27a21 21 0 1 1-2 14" fill="none" stroke="#72ebd8" stroke-width="4" stroke-linecap="round"/><path d="M17 15v14h14" fill="none" stroke="#72ebd8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 25v13l9 6" fill="none" stroke="#a79cff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title description">
+  <title id="title">Suvi Share</title>
+  <desc id="description">A private, local-first file sharing application for Android, Windows, Linux, and browsers.</desc>
+  <defs>
+    <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071820"/>
+      <stop offset="0.55" stop-color="#0a2630"/>
+      <stop offset="1" stop-color="#10243a"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10b8a8"/>
+      <stop offset="1" stop-color="#32d6ba"/>
+    </linearGradient>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#25d0b4" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#25d0b4"/>
+      <stop offset="1" stop-color="#8b7cff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#20c7af" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#20c7af" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#8ee7da" stroke-opacity="0.055"/>
+    </pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="460" rx="28" fill="url(#surface)"/>
+  <rect width="1200" height="460" rx="28" fill="url(#grid)"/>
+  <circle cx="188" cy="224" r="210" fill="url(#glow)"/>
+  <circle cx="1100" cy="60" r="190" fill="url(#glow)" opacity="0.45"/>
+
+  <g filter="url(#shadow)">
+    <circle cx="192" cy="210" r="108" fill="url(#brand)"/>
+    <path d="M120 208 264 145l-62 145-25-62-57-20Z" fill="#fff"/>
+    <path d="m177 228 38-37" fill="none" stroke="#d9fff8" stroke-width="7" stroke-linecap="round" opacity="0.62"/>
+  </g>
+
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="355" y="174" fill="#f4fffd" font-size="64" font-weight="800" letter-spacing="2">SUVI SHARE</text>
+    <text x="358" y="222" fill="#a9cbc6" font-size="24" font-weight="500">Share across the room, not across the internet.</text>
+    <text x="358" y="267" fill="#739b98" font-size="17">Fast. Private. Built for every screen.</text>
+
+    <g transform="translate(358 304)" font-size="13" font-weight="700" letter-spacing="1.2">
+      <rect width="152" height="42" rx="21" fill="#123a3a" stroke="#1e6f67"/>
+      <text x="76" y="26" fill="#8ff5e3" text-anchor="middle">LOCAL-FIRST</text>
+      <rect x="166" width="126" height="42" rx="21" fill="#1a3041" stroke="#31526b"/>
+      <text x="229" y="26" fill="#b7d9ef" text-anchor="middle">PRIVATE</text>
+      <rect x="306" width="190" height="42" rx="21" fill="#252d4b" stroke="#4a4f82"/>
+      <text x="401" y="26" fill="#d0c9ff" text-anchor="middle">CROSS-PLATFORM</text>
+    </g>
+  </g>
+
+  <g transform="translate(915 125)" filter="url(#shadow)">
+    <rect x="0" y="0" width="170" height="210" rx="28" fill="#0f2631" stroke="#2c5c63" stroke-width="2"/>
+    <rect x="17" y="24" width="136" height="143" rx="17" fill="#12383d"/>
+    <circle cx="85" cy="194" r="7" fill="#40d6bd"/>
+    <path d="M51 95h68M85 61v68" stroke="#61e7d1" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="85" cy="95" r="47" fill="none" stroke="#39a99b" stroke-width="2" stroke-dasharray="4 8"/>
+  </g>
+  <path d="M755 392c54-28 104-28 150 0" fill="none" stroke="url(#route)" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 12"/>
+  <circle cx="821" cy="374" r="6" fill="#39d2b9"/>
+  <circle cx="866" cy="378" r="4" fill="#8b7cff"/>
+</svg>

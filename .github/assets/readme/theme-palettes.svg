@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="175" viewBox="0 0 1200 175" role="img" aria-labelledby="title description">
+  <title id="title">Suvi Share theme palettes</title>
+  <desc id="description">Six color palettes: Suvi, Ocean, Sunset, Forest, Lavender, and Rose.</desc>
+  <rect width="1200" height="175" rx="22" fill="#0a1c25"/>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" text-anchor="middle">
+    <g transform="translate(35 27)">
+      <rect width="170" height="121" rx="18" fill="#102d31" stroke="#1f645e"/>
+      <circle cx="65" cy="51" r="25" fill="#11a999"/><circle cx="96" cy="51" r="25" fill="#39d5bd" fill-opacity="0.82"/>
+      <text x="85" y="98" fill="#dffbf6">Suvi</text>
+    </g>
+    <g transform="translate(227 27)">
+      <rect width="170" height="121" rx="18" fill="#112b42" stroke="#245b83"/>
+      <circle cx="65" cy="51" r="25" fill="#147bc1"/><circle cx="96" cy="51" r="25" fill="#56b9ed" fill-opacity="0.82"/>
+      <text x="85" y="98" fill="#dfF5ff">Ocean</text>
+    </g>
+    <g transform="translate(419 27)">
+      <rect width="170" height="121" rx="18" fill="#3d251f" stroke="#84503e"/>
+      <circle cx="65" cy="51" r="25" fill="#ef704f"/><circle cx="96" cy="51" r="25" fill="#f6bd60" fill-opacity="0.86"/>
+      <text x="85" y="98" fill="#fff1e3">Sunset</text>
+    </g>
+    <g transform="translate(611 27)">
+      <rect width="170" height="121" rx="18" fill="#162f27" stroke="#356b55"/>
+      <circle cx="65" cy="51" r="25" fill="#27875f"/><circle cx="96" cy="51" r="25" fill="#70c995" fill-opacity="0.84"/>
+      <text x="85" y="98" fill="#e1f9eb">Forest</text>
+    </g>
+    <g transform="translate(803 27)">
+      <rect width="170" height="121" rx="18" fill="#2d2842" stroke="#635a8c"/>
+      <circle cx="65" cy="51" r="25" fill="#7b68b8"/><circle cx="96" cy="51" r="25" fill="#b8a5ed" fill-opacity="0.85"/>
+      <text x="85" y="98" fill="#f0ebff">Lavender</text>
+    </g>
+    <g transform="translate(995 27)">
+      <rect width="170" height="121" rx="18" fill="#3b2432" stroke="#7c4b68"/>
+      <circle cx="65" cy="51" r="25" fill="#bd4f7b"/><circle cx="96" cy="51" r="25" fill="#ee91b5" fill-opacity="0.84"/>
+      <text x="85" y="98" fill="#ffe9f2">Rose</text>
+    </g>
+  </g>
+</svg>
