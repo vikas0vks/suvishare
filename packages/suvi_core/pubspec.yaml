@@ -1,0 +1,25 @@
+name: suvi_core
+description: Pure-Dart core of Suvi Share — protocol models, LAN discovery, HTTPS server, peer client, security.
+version: 0.3.3
+publish_to: none
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  shelf: ^1.4.2
+  shelf_router: ^1.1.4
+  dio: ^5.11.0
+  basic_utils: ^5.8.2
+  crypto: ^3.0.7
+  uuid: ^4.6.0
+  mime: ^2.0.0
+  logging: ^1.3.0
+  meta: ^1.16.0
+  path: ^1.9.1
+  collection: ^1.19.1
+
+dev_dependencies:
+  http: ^1.6.0
+  lints: ^6.0.0
+  test: ^1.25.0

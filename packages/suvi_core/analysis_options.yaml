@@ -1,0 +1,6 @@
+include: package:lints/recommended.yaml
+
+linter:
+  rules:
+    prefer_initializing_formals: false
+    unnecessary_underscores: false

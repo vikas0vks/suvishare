@@ -1,0 +1,52 @@
+name: Build checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Analyze and test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Install Flutter 3.47.0
+        run: |
+          git clone --branch 3.47.0 --depth 1 https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+
+      - name: Cache Dart packages
+        uses: actions/cache@v6
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-pub-
+
+      - name: Verify core library
+        working-directory: packages/suvi_core
+        run: |
+          dart pub get
+          dart analyze --fatal-infos
+          dart test
+
+      - name: Verify application
+        working-directory: app
+        run: |
+          flutter pub get
+          flutter gen-l10n
+          flutter analyze --fatal-infos
+          flutter test

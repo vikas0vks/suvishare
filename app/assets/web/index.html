@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#00897B">
+<title>Suvi Share</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%2300897B'/><path d='M8 17l16-7-7 16-2-7-7-2z' fill='white'/></svg>">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="15" fill="currentColor"/><path d="M8 17l16-7-7 16-2-7-7-2z" fill="#fff"/></svg>
+    </div>
+    <div class="head-text">
+      <h1>Suvi Share</h1>
+      <p id="peer-line" class="muted">Connecting…</p>
+    </div>
+  </header>
+
+  <!-- PIN gate ------------------------------------------------------- -->
+  <section id="pin-card" class="card hidden">
+    <h2>Enter PIN</h2>
+    <p class="muted">This device asks for a PIN before sharing.</p>
+    <form id="pin-form" class="row">
+      <input id="pin-input" type="text" inputmode="numeric" autocomplete="off"
+             maxlength="8" placeholder="4–8 digits" aria-label="PIN">
+      <button class="btn primary" type="submit">Unlock</button>
+    </form>
+    <p id="pin-error" class="error hidden" role="alert">That PIN did not work.</p>
+  </section>
+
+  <!-- Download ------------------------------------------------------- -->
+  <section id="download-card" class="card hidden">
+    <div class="card-head">
+      <h2>Files for you</h2>
+      <span id="download-summary" class="muted"></span>
+    </div>
+    <ul id="download-list" class="list"></ul>
+    <div class="row end">
+      <button id="download-all" class="btn primary" type="button">Download all</button>
+    </div>
+  </section>
+
+  <!-- Upload --------------------------------------------------------- -->
+  <section class="card">
+    <div class="card-head">
+      <h2>Send to this device</h2>
+    </div>
+    <div id="drop" class="drop" tabindex="0" role="button"
+         aria-label="Choose files to send, or drop them here">
+      <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+        <path fill="currentColor" d="M12 3l5 5h-3v6h-4V8H7l5-5zM5 18h14v2H5z"/>
+      </svg>
+      <p><strong>Choose files</strong> or drop them here</p>
+      <input id="file-input" type="file" multiple hidden>
+    </div>
+
+    <label class="text-toggle" for="text-input">Or send a message</label>
+    <textarea id="text-input" rows="2" placeholder="Type or paste text…"></textarea>
+
+    <ul id="upload-list" class="list"></ul>
+    <div class="row end">
+      <button id="clear-btn" class="btn" type="button" hidden>Clear</button>
+      <button id="send-btn" class="btn primary" type="button" disabled>Send</button>
+    </div>
+    <p id="upload-status" class="muted status" role="status" aria-live="polite"></p>
+  </section>
+
+  <footer class="foot muted">
+    Only devices on this Wi-Fi can reach this page. Nothing is uploaded to the internet.
+    <br><span class="credit">Developed by vikas0vks</span>
+  </footer>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Suvi Share
+GenericName=LAN File Sharing
+Comment=Share files, photos and text across your Wi-Fi. No cloud, no account.
+Comment[hi]=अपने Wi-Fi पर फ़ाइलें, फ़ोटो और टेक्स्ट शेयर करें। न क्लाउड, न अकाउंट।
+Exec=suvi-share
+Icon=suvi-share
+Terminal=false
+Type=Application
+Categories=Network;FileTransfer;Utility;
+Keywords=share;file;transfer;lan;wifi;airdrop;localsend;
+StartupWMClass=suvi_share

@@ -1,0 +1,51 @@
+# Flutter and Dart generated state
+**/.dart_tool/
+**/.flutter-plugins-dependencies
+**/.packages
+**/build/
+**/coverage/
+**/flutter/ephemeral/
+**/flutter/generated_plugin_registrant.*
+**/flutter/generated_plugins.cmake
+/app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+
+# Native tool state
+**/.gradle/
+**/.cxx/
+**/CMakeFiles/
+/app/android/local.properties
+
+# Editors and operating systems
+**/.idea/
+**/.vscode/
+**/*.iml
+**/.DS_Store
+**/Thumbs.db
+
+# Signing material and local credentials
+**/key.properties
+**/*.jks
+**/*.keystore
+**/*.p12
+**/*.pem
+**/*.key
+**/.env
+**/.env.*
+
+# Runtime and generated release output
+**/*.log
+/dist/
+/packaging/windows/output/
+/packaging/linux/output/
+/suvi-inbox/
+
+# Private project material: never publish
+/.claude/
+/AUDIT_RULES.md
+/docs/
+/packaging/screenshots/
+/packaging/linux/wsl-*.sh
+/app/README.md
+/packages/suvi_core/README.md
+/packages/suvi_core/CHANGELOG.md
+/packages/suvi_core/LICENSE
