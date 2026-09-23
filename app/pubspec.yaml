@@ -1,7 +1,7 @@
 name: suvi_share
 description: "Suvi Share — share files, text and media across your Wi-Fi. No cloud, no account."
 publish_to: 'none'
-version: 0.4.0+7
+version: 0.4.1+8
 
 environment:
   sdk: ^3.13.0
