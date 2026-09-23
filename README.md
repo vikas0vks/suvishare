@@ -89,13 +89,39 @@
 
 ## Download
 
-Get the newest production build from **[GitHub Releases](https://github.com/vikas0vks/suvishare/releases/latest)**.
+<p align="center"><strong>Choose your platform. Each button downloads the matching package from the latest release.</strong></p>
 
-| Platform | Recommended package | Also available |
-|:--|:--|:--|
-| Android | `android-arm64.apk` for most modern phones | Universal APK |
-| Windows | `windows-x64-setup.exe` | Installer with private-network firewall setup |
-| Linux | `linux-amd64.deb` | Portable `linux-x64.tar.gz` archive |
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <a href="https://github.com/vikas0vks/suvishare/releases/latest/download/SuviShare-android-arm64.apk">
+        <img src=".github/assets/readme/downloads/android.svg" width="100%" alt="Download the latest Suvi Share ARM64 APK for Android">
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="https://github.com/vikas0vks/suvishare/releases/latest/download/SuviShare-windows-x64-setup.exe">
+        <img src=".github/assets/readme/downloads/windows.svg" width="100%" alt="Download the latest Suvi Share installer for Windows">
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="https://github.com/vikas0vks/suvishare/releases/latest/download/SuviShare-linux-amd64.deb">
+        <img src=".github/assets/readme/downloads/linux.svg" width="100%" alt="Download the latest Suvi Share Debian package for Linux">
+      </a>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <a href="https://github.com/vikas0vks/suvishare/releases/latest/download/SuviShare-android-universal.apk"><strong>Universal Android APK</strong></a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://github.com/vikas0vks/suvishare/releases/latest/download/SuviShare-linux-x64.tar.gz"><strong>Portable Linux archive</strong></a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://github.com/vikas0vks/suvishare/releases/latest/download/SHA256SUMS.txt"><strong>SHA-256 checksums</strong></a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://github.com/vikas0vks/suvishare/releases/latest"><strong>All release files</strong></a>
+</p>
+
+<p align="center"><sub>These permanent links always follow the newest published GitHub release.</sub></p>
 
 Every release includes SHA-256 checksums. Android packages are release-signed; signing material remains in protected repository secrets and is never committed.
 

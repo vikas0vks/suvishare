@@ -65,13 +65,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          VERSION="$(sed -n 's/^version: *\([^+]*\).*/\1/p' app/pubspec.yaml)"
           mkdir -p release/android
-          cp app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk "release/android/SuviShare-$VERSION-android-arm64.apk"
-          cp app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "release/android/SuviShare-$VERSION-android-arm32.apk"
-          cp app/build/app/outputs/flutter-apk/app-x86_64-release.apk "release/android/SuviShare-$VERSION-android-x86_64.apk"
-          cp app/build/app/outputs/flutter-apk/app-release.apk "release/android/SuviShare-$VERSION-android-universal.apk"
-          cp app/build/app/outputs/bundle/release/app-release.aab "release/android/SuviShare-$VERSION-android.aab"
+          cp app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk "release/android/SuviShare-android-arm64.apk"
+          cp app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "release/android/SuviShare-android-arm32.apk"
+          cp app/build/app/outputs/flutter-apk/app-x86_64-release.apk "release/android/SuviShare-android-x86_64.apk"
+          cp app/build/app/outputs/flutter-apk/app-release.apk "release/android/SuviShare-android-universal.apk"
+          cp app/build/app/outputs/bundle/release/app-release.aab "release/android/SuviShare-android.aab"
 
       - name: Upload Android artifacts
         uses: actions/upload-artifact@v7
@@ -108,7 +107,7 @@ jobs:
         run: |
           $version = ((Select-String -Path app/pubspec.yaml -Pattern '^version:').Line -replace '^version:\s*', '').Split('+')[0]
           New-Item -ItemType Directory -Force release/windows | Out-Null
-          Copy-Item "packaging/windows/output/SuviShare-$version-windows-x64-setup.exe" release/windows/
+          Copy-Item "packaging/windows/output/SuviShare-$version-windows-x64-setup.exe" "release/windows/SuviShare-windows-x64-setup.exe"
 
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v7
@@ -145,8 +144,8 @@ jobs:
           set -euo pipefail
           VERSION="$(sed -n 's/^version: *\([^+]*\).*/\1/p' app/pubspec.yaml)"
           mkdir -p release/linux
-          cp "packaging/linux/output/suvi-share_${VERSION}_amd64.deb" "release/linux/SuviShare-$VERSION-linux-amd64.deb"
-          cp "packaging/linux/output/SuviShare-$VERSION-linux-x64.tar.gz" release/linux/
+          cp "packaging/linux/output/suvi-share_${VERSION}_amd64.deb" "release/linux/SuviShare-linux-amd64.deb"
+          cp "packaging/linux/output/SuviShare-$VERSION-linux-x64.tar.gz" "release/linux/SuviShare-linux-x64.tar.gz"
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v7
